@@ -18,7 +18,7 @@ namespace NumbersToWords
 
             var descendingOrder = reverse.OrderByDescending(i => i.Position).ToList();
 
-            for (var i = 0; i < len; i++)
+            for (var i = 0; i < len; i++) 
             {
                 var itm = descendingOrder[i];
                 if (!String.IsNullOrEmpty(itm.ValueInString))

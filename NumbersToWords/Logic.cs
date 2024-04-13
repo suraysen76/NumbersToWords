@@ -100,7 +100,7 @@ namespace NumbersToWords
                         else { col.valueTitle = ""; }
                         break;
                     case 7:
-                        col.valueTitle = "million";
+                        col.valueTitle = "million"; 
                         break;
                     default:
                         col.valueTitle = "";

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NumbersToWords.Models
 {
-    public class NumberStructure
+    public class NumberStructure 
     {
         public int Position { get; set; }
         public int Value { get; set; }

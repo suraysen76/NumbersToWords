@@ -7,7 +7,7 @@ namespace NumbersToWords
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args) 
         {          
             // Getting String (word) from Console
 
