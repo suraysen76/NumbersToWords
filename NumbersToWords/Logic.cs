@@ -12,11 +12,14 @@ namespace NumbersToWords
         public static List<NumberStructure> ConvertToWords(string input)
         {
             var model = PopulateModel(input);
-            model = ConstructMultiplierWord(model);
+            
+            
             model = ConstructNumberWord(model);
+            model = ConstructValueTitleWord(model);
+
             model = ModifyTensWord(model,2);
-            model = ModifyTeensWord(model,2,1);
-            model = ModifyTensWord(model, 5);
+
+            model = ModifyTeensWord(model,2,1);            model = ModifyTensWord(model, 5);
             model = ModifyTeensWord(model, 5, 4);
             return model;
         }
@@ -65,7 +68,7 @@ namespace NumbersToWords
             return model;
 
         }
-        private static List<NumberStructure> ConstructMultiplierWord(List<NumberStructure> model)
+        private static List<NumberStructure> ConstructValueTitleWord(List<NumberStructure> model)
         {
             
             foreach (var col in model)
@@ -75,22 +78,32 @@ namespace NumbersToWords
                 {
                     
                     case 3:
-                        col.Multiplier = "hundred";
+                        
+                        if (col.Value != 0)
+                        {
+                            col.valueTitle = "hundred";
+                        }
+                        else { col.valueTitle = ""; }
+                                    
                         break;
                     case 4:
-                        col.Multiplier = "thousand";
+                        col.valueTitle = "thousand";
                         break;
                     //case 5:
                     //    col.Multiplier = "tens";
                     //    break;
                     case 6:
-                        col.Multiplier = "hundred";
+                        if (col.Value != 0)
+                        {
+                            col.valueTitle = "hundred";
+                        }
+                        else { col.valueTitle = ""; }
                         break;
                     case 7:
-                        col.Multiplier = "million";
+                        col.valueTitle = "million";
                         break;
                     default:
-                        col.Multiplier = "";
+                        col.valueTitle = "";
                         break;
 
                 }
@@ -104,19 +117,17 @@ namespace NumbersToWords
         private static List<NumberStructure> PopulateModel(string input)
         {
             var returnList = new List<NumberStructure>();
-            char[] charArray = input.ToCharArray();
-            Array.Reverse(charArray);
+            
 
             char[] stringArray = input.ToCharArray();
-            Array.Reverse(stringArray);
-                       
-
-            int position = 1;
+            int len = stringArray.Length;
+           
+            int position = len;
             foreach (char tempChar in stringArray)
             {
                 var value = Convert.ToInt32("" + tempChar);
                 var model = new NumberStructure() { Position = position, Value = value };
-                position++;
+                position--;
                 returnList.Add(model);
             }
             
@@ -157,9 +168,11 @@ namespace NumbersToWords
                         case 9:
                             col.ValueInString = "ninety";
                             break;
-
+                        case 1:
+                            col.ValueInString = "ten";
+                            break;
                         default:
-                            col.Multiplier = "";
+                            col.valueTitle = "";
                             break;
 
                     }
@@ -211,8 +224,8 @@ namespace NumbersToWords
                         break;
                 }
                 var temp = word;
-                model[tensPos-1].ValueInString = word;
-                model[onesPos-1].ValueInString = "";
+                model.Where(x=>x.Position== tensPos).First().ValueInString = word;
+                model.Where(x => x.Position == onesPos).First().ValueInString = "";
             }
             return model;
         }

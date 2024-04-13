@@ -9,7 +9,7 @@ namespace NumbersToWords.Models
         public int Position { get; set; }
         public int Value { get; set; }
 
-        public string Multiplier { get; set; }
+        public string valueTitle { get; set; }
         public string ValueInString { get; set; }
     }
 
