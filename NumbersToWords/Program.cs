@@ -15,8 +15,8 @@ namespace NumbersToWords
             string[] inputData;
 
             // Initialization of array/
-            inputData = new string[] { "110000" };
-            //inputData = new string[] { "167","1","10","50","16","4","89","100","411","501","1011","3001","2411","34000","11000","111200"};
+            //inputData = new string[] { "110000" };
+            inputData = new string[] { "1","10","15","50","100","104","115","156","399","1000","1009","1015","1100","1301","1414","10000","11000","11014","24110"};
             Console.WriteLine("Input :" + string.Join(", ", inputData) );
 
             foreach (var inputStr in inputData)
