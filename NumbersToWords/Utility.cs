@@ -16,6 +16,7 @@ namespace NumbersToWords
 
             var len = reverse.Count;
 
+            
             var descendingOrder = reverse.OrderByDescending(i => i.Position).ToList();
 
             for (var i = 0; i < len; i++) 
@@ -23,10 +24,27 @@ namespace NumbersToWords
                 var itm = descendingOrder[i];
                 if (!String.IsNullOrEmpty(itm.ValueInString))
                 {
-                    outputString += itm.ValueInString + " " + itm.valueTitle + " ";
+                    if (outputString.EndsWith(" "))
+                    {
+                        outputString += (itm.ValueInString + AddSpace() + itm.valueTitle);
+                    }
+                    else
+                    {
+                        outputString += AddSpace() + (itm.ValueInString + AddSpace() + itm.valueTitle);
+                    }
+
+                    
                 }
-                else if(!String.IsNullOrEmpty(itm.valueTitle)){
-                    outputString += " " + itm.valueTitle + " ";
+                else if(!String.IsNullOrEmpty(itm.valueTitle))
+                {
+                    if (outputString.EndsWith(" "))
+                    {
+                        outputString += (itm.valueTitle);
+                    }
+                    else
+                    {
+                        outputString += AddSpace() + (itm.valueTitle);
+                    }
                 }
             }
 
@@ -40,6 +58,11 @@ namespace NumbersToWords
                 output = output + itm.ValueInString + " " + itm.valueTitle + " ";   
             }
             return output;
+        }
+
+        private static string AddSpace()
+        {
+            return " ";
         }
     }
 }

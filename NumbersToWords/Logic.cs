@@ -18,9 +18,10 @@ namespace NumbersToWords
             model = ConstructValueTitleWord(model);
 
             model = ModifyTensWord(model,2);
-
-            model = ModifyTeensWord(model,2,1);            model = ModifyTensWord(model, 5);
-            model = ModifyTeensWord(model, 5, 4);
+            model = ModifyTeensWord(model,2);  
+            
+            model = ModifyTensWord(model, 5);
+            model = ModifyTeensWord(model, 5);
             return model;
         }
 
@@ -41,25 +42,25 @@ namespace NumbersToWords
                         col.ValueInString = "three";
                         break;
                     case 4:
-                        col.ValueInString = "four ";
+                        col.ValueInString = "four";
                         break;
                     case 5:
-                        col.ValueInString = "five ";
+                        col.ValueInString = "five";
                         break;
                     case 6:
-                        col.ValueInString = "six ";
+                        col.ValueInString = "six";
                         break;
                     case 7:
-                        col.ValueInString = "seven ";
+                        col.ValueInString = "seven";
                         break;
                     case 8:
-                        col.ValueInString = "eight ";
+                        col.ValueInString = "eight";
                         break;
                     case 9:
-                        col.ValueInString = "nine ";
+                        col.ValueInString = "nine";
                         break;
                     case 10:
-                        col.ValueInString = "ten ";
+                        col.ValueInString = "ten";
                         break;
                 }
 
@@ -89,9 +90,7 @@ namespace NumbersToWords
                     case 4:
                         col.valueTitle = "thousand";
                         break;
-                    //case 5:
-                    //    col.Multiplier = "tens";
-                    //    break;
+                    
                     case 6:
                         if (col.Value != 0)
                         {
@@ -107,8 +106,6 @@ namespace NumbersToWords
                         break;
 
                 }
-
-
             }
             return model;
 
@@ -144,6 +141,9 @@ namespace NumbersToWords
                     var val = col.Value;
                     switch (val)
                     {
+                        case 1:
+                            col.ValueInString = "ten";
+                            break;
                         case 2:
                             col.ValueInString = "twenty";
                             break;
@@ -168,9 +168,7 @@ namespace NumbersToWords
                         case 9:
                             col.ValueInString = "ninety";
                             break;
-                        case 1:
-                            col.ValueInString = "ten";
-                            break;
+                        
                         default:
                             col.valueTitle = "";
                             break;
@@ -182,14 +180,14 @@ namespace NumbersToWords
 
         }
 
-        private static List<NumberStructure> ModifyTeensWord(List<NumberStructure> model, int tensPos, int onesPos)
+        private static List<NumberStructure> ModifyTeensWord(List<NumberStructure> model, int tensPos)
         {
 
             var filteredModel = model.Where(x => x.Value == 1 && x.Position == tensPos).ToList();
             if (filteredModel.Count ==1)
             {
                 var word = String.Empty;
-                var onesVal = model.Where(x => x.Position == onesPos).ToList()[0].Value;
+                var onesVal = model.Where(x => x.Position == tensPos-1).ToList()[0].Value;
                 switch (onesVal)
                 {
                     case 0:
@@ -225,7 +223,7 @@ namespace NumbersToWords
                 }
                 var temp = word;
                 model.Where(x=>x.Position== tensPos).First().ValueInString = word;
-                model.Where(x => x.Position == onesPos).First().ValueInString = "";
+                model.Where(x => x.Position == tensPos-1).First().ValueInString = "";
             }
             return model;
         }
