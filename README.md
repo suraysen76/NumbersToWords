@@ -12,8 +12,7 @@ Example Output:
 Input :10, 3010, 15, 50, 100, 104, 115, 156, 399, 1000, 1009, 1015, 1100, 1301, 1414, 10000, 11000, 11010, 11014, 24110
 10 >>> ten
 3010 >>> three thousand ten
-15 >>> fifteen
-50 >>> fifty
+15 >>> fifteen50 >>> fifty
 100 >>> one hundred
 104 >>> one hundred four
 115 >>> one hundred fifteen
