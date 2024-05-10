@@ -11,12 +11,8 @@ namespace NumbersToWords
         public static string PrintResult(string result)
         {
             var outputString = String.Empty;
-
             var reverse = Logic.ConvertToWords(result);
-
             var len = reverse.Count;
-
-            
             var descendingOrder = reverse.OrderByDescending(i => i.Position).ToList();
 
             for (var i = 0; i < len; i++) 
@@ -31,9 +27,7 @@ namespace NumbersToWords
                     else
                     {
                         outputString += AddSpace() + (itm.ValueInString + AddSpace() + itm.valueTitle);
-                    }
-
-                    
+                    }                    
                 }
                 else if(!String.IsNullOrEmpty(itm.valueTitle))
                 {
@@ -47,7 +41,6 @@ namespace NumbersToWords
                     }
                 }
             }
-
             return outputString;
         }
 

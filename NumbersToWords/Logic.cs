@@ -2,17 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+
 
 namespace NumbersToWords
 {
     public static class Logic
-    {
-       
+    {    
         public static List<NumberStructure> ConvertToWords(string input)
         {
-            var model = PopulateModel(input);
-            
+            var model = PopulateModel(input);            
             
             model = ConstructNumberWord(model);
             model = ConstructValueTitleWord(model);
@@ -63,23 +61,18 @@ namespace NumbersToWords
                         col.ValueInString = "ten";
                         break;
                 }
-
-
             }
             return model;
-
         }
         private static List<NumberStructure> ConstructValueTitleWord(List<NumberStructure> model)
-        {
-            
+        {            
             foreach (var col in model)
             {
                 var pos = col.Position;
                 switch (pos)
                 {
                     
-                    case 3:
-                        
+                    case 3:                        
                         if (col.Value != 0)
                         {
                             col.valueTitle = "hundred";
@@ -104,7 +97,6 @@ namespace NumbersToWords
                     default:
                         col.valueTitle = "";
                         break;
-
                 }
             }
             return model;
@@ -114,8 +106,6 @@ namespace NumbersToWords
         private static List<NumberStructure> PopulateModel(string input)
         {
             var returnList = new List<NumberStructure>();
-            
-
             char[] stringArray = input.ToCharArray();
             int len = stringArray.Length;
            
@@ -126,11 +116,8 @@ namespace NumbersToWords
                 var model = new NumberStructure() { Position = position, Value = value };
                 position--;
                 returnList.Add(model);
-            }
-            
-
+            }         
             return returnList;
-
         }
         private static List<NumberStructure> ModifyTensWord(List<NumberStructure> model, int tensPos) {
 
@@ -172,17 +159,14 @@ namespace NumbersToWords
                         default:
                             col.valueTitle = "";
                             break;
-
                     }
                 }
             }
             return model;
-
         }
 
         private static List<NumberStructure> ModifyTeensWord(List<NumberStructure> model, int tensPos)
         {
-
             var filteredModel = model.Where(x => x.Value == 1 && x.Position == tensPos).ToList();
             if (filteredModel.Count ==1)
             {
